@@ -13,9 +13,12 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
+import axios from "axios";
 import { Trash } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 interface SettingFormProps {
@@ -28,6 +31,8 @@ const formSchema = z.object({
 
 type SettingFormValues = z.infer<typeof formSchema>;
 const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
+  const params = useParams();
+  const router = useRouter();
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData,
@@ -36,7 +41,18 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (data: SettingFormValues) => {};
+  const onSubmit = async (data: SettingFormValues) => {
+    try {
+      setLoading(true);
+      await axios.patch(`/api/stores/${params.storeId}`, data);
+      router.refresh();
+      toast.success("Updated successfully");
+    } catch (err) {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className="flex items-center justify-between">

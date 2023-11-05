@@ -38,3 +38,31 @@ export async function PATCH(
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { storeId: string } },
+) {
+  try {
+    const { userId } = auth();
+    if (!userId) {
+      return new NextResponse("Unauthenticated", { status: 400 });
+    }
+
+    if (!params.storeId) {
+      return new NextResponse("Store not found", { status: 400 });
+    }
+
+    const store = await prismadb.store.deleteMany({
+      where: {
+        id: params.storeId,
+        userId: userId,
+      },
+    });
+
+    return NextResponse.json(store);
+  } catch (err) {
+    console.log("[STORE_DELETE]", err);
+    return new NextResponse("Internal Server Error", { status: 500 });
+  }
+}
