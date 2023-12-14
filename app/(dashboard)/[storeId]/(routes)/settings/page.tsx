@@ -19,7 +19,7 @@ const SettingPage: React.FC<SettingPageProps> = async ({ params }) => {
 
   if (!store) redirect("/");
   return (
-    <div>
+    <div className="mx-8 mt-10">
       <SettingForm initialData={store} />
     </div>
   );

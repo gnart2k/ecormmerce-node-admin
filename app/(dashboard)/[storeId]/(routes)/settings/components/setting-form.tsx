@@ -1,4 +1,5 @@
 "use client";
+import { AlertModal } from "@/components/modals/alert-modal";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -55,6 +56,12 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
   };
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={() => {}}
+        loading={loading}
+      />
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="manage store" />
         <Button
@@ -68,7 +75,7 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
           <Trash className="h-4 w-4" />
         </Button>
       </div>
-      <Separator />
+      <Separator className="mb-8" />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -79,8 +86,8 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
+                <FormItem className="">
+                  <FormLabel className="ml-4">Name</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
