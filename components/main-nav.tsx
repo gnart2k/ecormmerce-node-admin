@@ -12,6 +12,17 @@ export default function MainNav({
 
   const routes = [
     {
+      href: `/${params.storeId}`,
+      lable: "Overview",
+      active: pathname === `${params.storeId}`,
+    },
+
+    {
+      href: `/${params.storeId}/billboard`,
+      lable: "Billboard",
+      active: pathname === `${params.storeId}/billboard`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       lable: "Setting",
       active: pathname === `${params.storeId}/setting`,
@@ -20,7 +31,10 @@ export default function MainNav({
 
   return (
     <nav
-      className={(cn("flex items-center space-x-4 lg:space-x-6"), className)}
+      className={cn(
+        "flex items-center space-x-4 mr-4 lg:space-x-6 lg:mr-6",
+        className,
+      )}
     >
       {routes.map((route) => (
         <Link
