@@ -61,9 +61,17 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ inititalData }) => {
   const onSubmit = async (data: BillboardFormValues) => {
     try {
       setLoading(true);
-      await axios.patch(`/api/billboard/${params.billboardId}`, data);
+      if (inititalData) {
+        await axios.patch(
+          `/api/${params.storeId}/billboard/${params.billboardId}`,
+          data,
+        );
+      } else {
+        await axios.post(`/api/${params.storeId}/billboard`, data);
+      }
       router.refresh();
-      toast.success("Updated successfully");
+      router.push(`/${params.storeId}/billboard`);
+      toast.success(toastMessage);
     } catch (err) {
       toast.error("Something went wrong");
     } finally {
@@ -74,14 +82,19 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ inititalData }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`api/billboard/${params.billboardId}`);
+      await axios.delete(
+        `api/${params.storeId}/billboard/${params.billboardId}`,
+      );
       router.refresh();
       router.push("/");
       toast.success("Delete successfully");
     } catch (err) {
-      toast.error("Something went wrong");
+      toast.error(
+        "Make sure to removed all categories using this billboard first",
+      );
     } finally {
       setLoading(false);
+      setOpen(false);
     }
   };
   return (
