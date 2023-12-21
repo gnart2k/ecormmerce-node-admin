@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Heading } from "@/components/ui/heading";
+import ImageUpload from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useOrigin } from "@/hooks/use-origin";
@@ -117,12 +118,32 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ inititalData }) => {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>Label</FormLabel>
+                  <FormLabel>Lable</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="billboard label"
+                      placeholder="billboard lable"
                       {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-8">
+            <FormField
+              name="imageUrl"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>Image Upload</FormLabel>
+                  <FormControl>
+                    <ImageUpload
+                      value={field.value ? [field.value] : []}
+                      disabled={loading}
+                      onChange={(url) => field.onChange(url)}
+                      onRemove={() => field.onChange("")}
                     />
                   </FormControl>
                   <FormMessage />
