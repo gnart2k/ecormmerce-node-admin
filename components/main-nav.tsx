@@ -14,18 +14,18 @@ export default function MainNav({
     {
       href: `/${params.storeId}`,
       lable: "Overview",
-      active: pathname === `${params.storeId}`,
+      active: pathname === `/${params.storeId}`,
     },
 
     {
       href: `/${params.storeId}/billboard`,
       lable: "Billboard",
-      active: pathname === `${params.storeId}/billboard`,
+      active: pathname === `/${params.storeId}/billboard`,
     },
     {
       href: `/${params.storeId}/settings`,
       lable: "Setting",
-      active: pathname === `${params.storeId}/setting`,
+      active: pathname === `/${params.storeId}/settings`,
     },
   ];
 

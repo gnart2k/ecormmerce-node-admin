@@ -41,7 +41,6 @@ type BillboardFormValues = z.infer<typeof formSchema>;
 const BillboardForm: React.FC<BillboardFormProps> = ({ inititalData }) => {
   const params = useParams();
   const router = useRouter();
-  const origin = useOrigin();
   const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: inititalData || {
