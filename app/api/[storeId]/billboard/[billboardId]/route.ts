@@ -105,6 +105,8 @@ export async function GET(
         id: params.billboardId,
       },
     });
+
+    return NextResponse.json(billboard);
   } catch (err) {
     console.log("[BILLBOARD_GET_ONE]");
     return new NextResponse("internal error", { status: 500 });

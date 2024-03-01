@@ -16,12 +16,15 @@ async function CategoriesPage({ params }: { params: { storeId: string } }) {
     },
   });
 
-  const formattedCategories: CategoryCollumn[] = categories.map((item) => ({
-    id: item.id,
-    name: item.name,
-    billboardLabel: item.billboard.label,
-    createdAt: format(item.createdAt, "MMMM do, yyyy"),
-  }));
+  const formattedCategories: CategoryCollumn[] =
+    categories != null
+      ? categories.map((item) => ({
+          id: item.id,
+          name: item.name,
+          billboardLabel: item.billboard.label,
+          createdAt: format(item.createdAt, "MMMM do, yyyy"),
+        }))
+      : [];
 
   return (
     <div className="flex-col">

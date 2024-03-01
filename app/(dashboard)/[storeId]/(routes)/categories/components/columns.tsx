@@ -10,13 +10,17 @@ export type CategoryCollumn = {
 
 export const columns: ColumnDef<CategoryCollumn>[] = [
   {
-    accessorKey: "label",
-    header: "Label",
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "billboardLabel",
+    header: "Billboard Label",
   },
   {
     accessorKey: "createdAt",
     header: "Date",
-    cell: ({ row }) => row.original.billboardLabel,
+    cell: ({ row }) => row.original.createdAt,
   },
   {
     id: "actions",

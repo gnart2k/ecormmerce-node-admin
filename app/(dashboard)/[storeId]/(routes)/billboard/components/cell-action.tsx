@@ -1,19 +1,26 @@
 "use client";
 import React, { useState } from "react";
 import { BillboardCollumn } from "./columns";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuLabel,
+//   DropdownMenuTrigger,
+// } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface CellActionProps {
   data: BillboardCollumn;
@@ -63,24 +70,15 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <b>Action</b>
           </DropdownMenuLabel>
 
-          <DropdownMenuItem
-            className="flex items-center p-2 bg-gray-100 focus:outline-none focus:cursor-pointer"
-            onClick={() => onCopy(data.id)}
-          >
+          <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Copy className="mr-2 h-4 w-4" />
             Copy Id
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => onUpdate()}
-            className="flex items-center p-2 bg-gray-100 focus:outline-none focus:cursor-pointer"
-          >
+          <DropdownMenuItem>
             <Edit className="mr-2 h-4 w-4" />
             Update
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => setOpen(true)}
-            className="flex items-center p-2 bg-gray-100 focus:outline-none focus:cursor-pointer"
-          >
+          <DropdownMenuItem>
             <Trash className="mr-2 h-4 w-4" />
             Delete
           </DropdownMenuItem>

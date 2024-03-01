@@ -15,6 +15,7 @@ export const columns: ColumnDef<BillboardCollumn>[] = [
   {
     accessorKey: "createdAt",
     header: "Date",
+    cell: ({ row }) => row.original.createdAt,
   },
   {
     id: "actions",
