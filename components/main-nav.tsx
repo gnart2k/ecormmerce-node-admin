@@ -30,7 +30,17 @@ export default function MainNav({
     {
       href: `/${params.storeId}/size`,
       lable: "Size",
-      active: pathname === `/${params.storeId}/sizes`,
+      active: pathname === `/${params.storeId}/size`,
+    },
+    {
+      href: `/${params.storeId}/color`,
+      lable: "Color",
+      active: pathname === `/${params.storeId}/color`,
+    },
+    {
+      href: `/${params.storeId}/product`,
+      lable: "Product",
+      active: pathname === `/${params.storeId}/product`,
     },
     {
       href: `/${params.storeId}/settings`,

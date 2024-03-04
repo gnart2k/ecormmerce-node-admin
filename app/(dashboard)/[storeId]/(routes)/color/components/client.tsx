@@ -4,26 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { SizeCollumn, columns } from "./columns";
+import { ColorCollumn, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
 import { Separator } from "@/components/ui/separator";
 
-interface SizeClientProps {
-  data: SizeCollumn[];
+interface ColorClientProps {
+  data: ColorCollumn[];
 }
-const SizeClient: React.FC<SizeClientProps> = ({ data }) => {
+const ColorClient: React.FC<ColorClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
   return (
     <div>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Size (${data.length})`}
+          title={`Color (${data.length})`}
           description="Manage sizes for your application"
         />
 
-        <Button onClick={() => router.push(`/${params.storeId}/size/new`)}>
+        <Button onClick={() => router.push(`/${params.storeId}/color/new`)}>
           <Plus className="mr-2 h-4 w-4" />
           <b>Add New</b>
         </Button>
@@ -37,4 +37,4 @@ const SizeClient: React.FC<SizeClientProps> = ({ data }) => {
   );
 };
 
-export default SizeClient;
+export default ColorClient;

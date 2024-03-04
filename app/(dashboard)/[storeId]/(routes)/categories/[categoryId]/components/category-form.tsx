@@ -145,7 +145,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="category lable"
+                      placeholder="category label"
                       {...field}
                     />
                   </FormControl>
