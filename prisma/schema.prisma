@@ -22,6 +22,7 @@ model Store {
   size       Size[]      @relation("StoreToSize")
   color      Color[]     @relation("StoreToColor")
   Product    Product[]   @relation("StoreToProduct")
+  Order      Order[]     @relation("StoreToOrder")
 }
 
 model Billboard {
@@ -80,22 +81,23 @@ model Color {
 }
 
 model Product {
-  id         String   @id @default(uuid())
+  id         String      @id @default(uuid())
   name       String
   price      Decimal
-  isFeatured Boolean  @default(false)
-  isArchived Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  isFeatured Boolean     @default(false)
+  isArchived Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
   images     Image[]
   storeId    String
-  store      Store    @relation("StoreToProduct", fields: [storeId], references: [id])
+  store      Store       @relation("StoreToProduct", fields: [storeId], references: [id])
   categoryId String
-  categories Category @relation(fields: [categoryId], references: [id])
+  categories Category    @relation(fields: [categoryId], references: [id])
   colorId    String
-  color      Color    @relation(fields: [colorId], references: [id])
+  color      Color       @relation(fields: [colorId], references: [id])
   sizeId     String
-  size       Size     @relation(fields: [sizeId], references: [id])
+  size       Size        @relation(fields: [sizeId], references: [id])
+  orderItems OrderItem[]
 
   @@index([storeId])
   @@index([categoryId])
@@ -111,5 +113,31 @@ model Image {
   productId String
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@index([productId])
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  storeId    String
+  store      Store       @relation("StoreToOrder", fields: [storeId], references: [id])
+  isPaid     Boolean     @default(false)
+  phone      String      @default("")
+  address    String      @default("")
+  orderItems OrderItem[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([storeId])
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String?
+  productId String
+  quantity  Int
+  product   Product @relation(fields: [productId], references: [id])
+  order     Order?  @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
   @@index([productId])
 }
