@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { BillboardCollumn } from "./columns";
+import { ProductCollumn } from "./columns";
 // import {
 //   DropdownMenu,
 //   DropdownMenuContent,
@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 interface CellActionProps {
-  data: BillboardCollumn;
+  data: ProductCollumn;
 }
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const router = useRouter();
@@ -36,16 +36,16 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   };
 
   const onUpdate = () => {
-    router.push(`/${params.storeId}/billboard/${data.id}`);
+    router.push(`/${params.storeId}/product/${data.id}`);
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboard/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/product/${data.id}`);
       router.refresh();
-      router.push(`/${params.storeId}/billboard`);
-      toast.success("billboard deleted");
+      router.push(`/${params.storeId}/product`);
+      toast.success("product deleted");
     } catch (err) {
       console.log(err);
     }
